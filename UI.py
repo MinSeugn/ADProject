@@ -94,7 +94,7 @@ class othello(QWidget):
         ShowBox.addLayout(BoardBox8)
         ShowBox.addLayout(ScoreTimerBox)
 
-        self.setGeometry(300, 300, 500, 500)
+        self.setGeometry(300, 300, 350, 300)
         self.setLayout(ShowBox)
 
 
