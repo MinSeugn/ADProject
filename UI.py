@@ -8,7 +8,7 @@ from PyQt5.QtWidgets import QLayout, QGridLayout, QLineEdit
 from PyQt5.QtGui import QIcon, QPixmap
 import sys
 
-
+board = [[0 for i in range(8)] for j in range(8)]
 
 class othello(QWidget):
     def __init__(self):
@@ -36,8 +36,12 @@ class othello(QWidget):
         self.ComLable = QLabel('Com: ',)
 
         self.PlayerScore = QLineEdit()
+        self.PlayerScore.setReadOnly(True)
         self.TimerLine = QLineEdit()
+        self.TimerLine.setReadOnly(True)
         self.ComScore = QLineEdit()
+        self.ComScore.setReadOnly(True)
+
 
         OthelloBoard = QPixmap('othelloBoard.jpeg')
         OthelloBoard_img = QLabel()
@@ -120,7 +124,9 @@ class othello(QWidget):
 
     def buttonClicked(self):
         key = self.sender().text()
+
         if key == 'start':
+            turn(self)
             #시작할  흑백 돌 랜덤 배치
             x = randint(1,11)
             for i in range(3,5):
@@ -128,13 +134,52 @@ class othello(QWidget):
                     if (x%2 == 0):
                         if (i == j):
                             self.BoardButton[i][j].setStyleSheet('background:black')
+                            self.BoardButton[i][j].setEnabled(False)
+                            board[i][j] = 1
+                            GameScore(self)
                         else:
                             self.BoardButton[i][j].setStyleSheet('background:white')
+                            self.BoardButton[i][j].setEnabled(False)
+                            board[i][j] = 2
+                            GameScore(self)
                     else:
                         if (i == j):
                             self.BoardButton[i][j].setStyleSheet('background:white')
+                            self.BoardButton[i][j].setEnabled(False)
+                            board[i][j] = 2
+                            GameScore(self)
                         else:
                             self.BoardButton[i][j].setStyleSheet('background:black')
+                            self.BoardButton[i][j].setEnabled(False)
+                            board[i][j] = 1
+                            GameScore(self)
+
+def GameScore(self):
+    playerScore = 0
+    comScore = 0
+    for i in range(0,8):
+        for j in range(0,8):
+            if board[i][j] == 1:
+                playerScore += 1
+            elif board[i][j] ==2:
+                comScore += 1
+    self.PlayerScore.setText(str(playerScore))
+    self.ComScore.setText(str(comScore))
+
+def turn(self):
+    count = 1
+    if (count % 2 != 0):
+        self.PlayerLable.setStyleSheet("color : blue;"
+                                       "background-color: #87CEFA;"
+                                       "border-style: solid;"
+                                       "border-width: 3px;"
+                                       "border-color: #1E90FF")
+    else:
+        self.ComLable.setStyleSheet("color : blue;"
+                                       "background-color: #87CEFA;"
+                                       "border-style: solid;"
+                                       "border-width: 3px;"
+                                       "border-color: #1E90FF")
 
 
 
