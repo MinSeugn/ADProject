@@ -4,3 +4,5 @@
 
 추가하고 싶은데 못한 것
 10초 타이머/BoardButton 사이즈 조절
+
+https://docs.google.com/document/d/1E1mGrIaW6gWoWtgFMhR0cZPv_-XqLaiygQvkkxcnMRI/edit
